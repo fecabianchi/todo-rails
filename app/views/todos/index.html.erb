@@ -1,0 +1,37 @@
+<header class="header">
+  <h2> To Do List </h2>
+  <%= form_for Todo.new do |f| %>
+    <%= f.text_field :description %>
+    <%= f.submit "Add" %>
+  <% end %>
+</header>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <% if !todo.completed? %>
+      <li>
+        <%= link_to todos_path(:id => todo.id), :class => "complete", :method => :put do %>
+          <%= fa_icon "check"%>
+        <% end %>
+          <%= todo.description %>
+        <%= link_to todos_path(:id => todo.id), :class => "close", :method => :delete do %>
+          <%= fa_icon "trash"%>
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to todos_path(:id => todo.id), :class => "complete", :method => :put do %>
+          <%= fa_icon "check"%>
+        <% end %>
+
+          <strike>
+            <%= todo.description %>
+          </strike>
+
+          <%= link_to todos_path(:id => todo.id), :class => "close", :method => :delete do %>
+            <%= fa_icon "trash"%>
+          <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
