@@ -16,11 +16,9 @@ class TodosController < ApplicationController
     redirect_to root_url
   end
 
-
   def update
     id = params[:id]
     data = Todo.find(id)
-    puts data
     if data.completed?
       data.update_attribute(:completed, false)
     else
